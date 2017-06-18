@@ -9,17 +9,24 @@
 	<link href="application/views/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="application/views/css/magnific-popup.css" rel="stylesheet"> 
 	<link href="application/views/css/templatemo_style.css" rel="stylesheet" type="text/css">
+	<link href="application/views/css/search.css" rel="fieldset" type="text/css">
 </head>
 <body>
 	<div class="main-container">
 		<nav class="main-nav">
 			<div id="logo" class="left"><a href="#"></a>Fanner</div>
 			<ul class="nav right center-text">
-				<li class="btn active">Home</li>
+				<!--<li class="btn active">Home</li>
 				<li class="btn"><a href="">About</a></li>
 				<li class="btn"><a href="">Awards</a></li>				
 				<li class="btn"><a href="">Contact</a></li>
-				<li class="btn"><a rel="" href="#">External</a></li>
+				<li class="btn"><a rel="" href="#">External</a></li>-->
+				<form method="get" id="searchform" action="index">
+					<fieldset class="search">
+						<input type="text" class="box" name="word" id="word" class="inputText" placeholder="你喜欢的歌或歌手" x-webkit-speech>
+          				<button class="btn" title="SEARCH"> </button>
+    				</fieldset>
+				</form>
 			</ul>
 		</nav>
 		<div class="content-container">

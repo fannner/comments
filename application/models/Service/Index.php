@@ -19,4 +19,10 @@ class Service_IndexModel extends Service_AbstractModel {
 		}
 		return;
 	}
+
+	public function getCommentsByWord($word) {
+		$indexDao = new Dao_IndexModel();
+		return $indexDao->getCommentsByWord($word);
+	
+	}
 }

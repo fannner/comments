@@ -45,6 +45,17 @@ class Dao_IndexModel extends Dao_AbstractModel {
 		$append .= " limit {$limit} offset {$offset}";
 		return $db->select(self::$_table, $fileds, $conds, $append);
 	}
+	
+	public function getCommentsByWord($word, $desc = true) {
+		$db = self::getInstance();
+		$fileds = array("*");
+		$cond = null;
+		$append = " where song_name like '%".$word."%' or song_singer like '%" .$word."%'";
+		if ($desc) {
+			$append .= " order by create_time desc";
+		}
+		return $db->select(self::$_table, $fileds, $conds, $append);
+	}
 
 	public function getTotalPage() {
 		
