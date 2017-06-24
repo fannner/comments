@@ -52,7 +52,7 @@ class NeteaseController extends AbstractController {
 		$url = 'http://music.163.com/api/search/get/web?csrf_token=';
 		$postFiled = 'hlpretag=&hlposttag=&s='. $musicId . '&type=1&offset=0&total=true&limit=1';
 		$musicInfo = $this->curlNeteaseApi($url, 'POST', $postFiled);
-		if ($musicInfo && $formatData = json_decode($musicInfo, true)) {
+		if ($musicInfo && ($formatData = json_decode($musicInfo, true))) {
 			if (isset($formatData['result']['songs'][0]) && isset($formatData['result']['songs'][0]['id']) && 
 			    isset($formatData['result']['songs'][0]['name']) && isset($formatData['result']['songs'][0]['artists'][0]['name'])) {
 				$music = $formatData['result']['songs'][0]['id'] ."\t" .$formatData['result']['songs'][0]['name'] ."\t" .$formatData['result']['songs'][0]['artists'][0]['name'] ."\n";
@@ -77,7 +77,7 @@ class NeteaseController extends AbstractController {
 		);
 		foreach($topic as $key => $item) {
 			$musicInfo = $instance->playlist($key);
-			if ($decodeMusic = json_decode($musicInfo, true) && isset($decodeMusic['playlist']['trackIds'])) {
+			if (($decodeMusic = json_decode($musicInfo, true)) && isset($decodeMusic['playlist']['trackIds'])) {
 				foreach ($decodeMusic['playlist']['tracks'] as $detail) {
 					$music = $detail['id'] ."\t" .$detail['name'] ."\t" .$detail['ar'][0]['name']. "\n";
 					file_put_contents($musicFile, $music, FILE_APPEND);
@@ -100,23 +100,23 @@ class NeteaseController extends AbstractController {
 			'Content-Type: application/x-www-form-urlencoded',
 			'Referer: http://music.163.com/search/',
 		);
-        	$curl = curl_init();
-        	curl_setopt($curl, CURLOPT_URL,$url);
-        	curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL,$url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 		if ($method == 'POST') {
 			curl_setopt($curl, CURLOPT_POST, 1); 
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $postFiled);
 		}
-        	$src = curl_exec($curl);
-        	$errno = curl_errno( $curl);
-        	$info  = curl_getinfo($curl);
-        	if ($errno != 0 && $info['http_code'] != 200) {
-            		$time = date("Y-m-d H:i:s"); 
-            		//write_log
+		$src = curl_exec($curl);
+		$errno = curl_errno( $curl);
+		$info  = curl_getinfo($curl);
+		if ($errno != 0 && $info['http_code'] != 200) {
+			$time = date("Y-m-d H:i:s"); 
+			//write_log
 			//file_put_contents("parse.log".date("Y-m-d"), var_export($time." curl errno info:    " .json_decode($info)."\n", true), FILE_APPEND);
-        	}   
-        	curl_close($curl);
-        	return $src;
-    	}
+		}   
+		curl_close($curl);
+		return $src;
+	}
 }

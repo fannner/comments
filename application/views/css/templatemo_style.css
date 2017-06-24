@@ -216,7 +216,7 @@ p.justify { text-align: justify; }
 .portfolio-item .btn:hover { background-color: #ddd; }
 .pagination { width: 100%; }
 .pagination li {
-	width: 30px;
+	width: 80px;
 	height: 30px;
 	line-height: 30px;	
 	background-color: white;

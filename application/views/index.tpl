@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <head>
 	<title> 范儿 </title>
-	<meta name="keywords" content="你每翻开的一张卡片，都是一个故事！" />
-	<meta name="description" content="你每翻开的一张卡片，都是一个故事！" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
@@ -33,11 +31,8 @@
 			<header>
 			<h2 class="center-text">你每翻开的一张卡片，都是一个故事！</h2>
 			</header>
-		<div id="portfolio-content" class="center-text">
-			<div class="portfolio-page" id="page-1">
-	<ul>
-	{foreach from= $content item=value}	
-			<div class="portfolio-group">
+			{foreach from= $content item=value}	
+				<div class="portfolio-group">
 					<a class="portfolio-item">
 						<img src="{$value['commenter_avatar']}" alt="image 1">
 						<div class="detail">
@@ -45,25 +40,24 @@
 							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----来自用户'{$value['commenter_nickname']}'在歌手{$value['song_singer']}《{$value['song_name']}》下的留言</p>
 						</div>
 					</a>				
-			</div>
-		{/foreach}
-			</div> <!-- page 3 -->		
+				</div>
+			{/foreach}
 			<div class="pagination">
 				<ul class="nav">
+					<!--<li> 共{$total}页</li> -->
 					{if $smarty.get.page > 0 }
-						<li> <a href="/index?page={$smarty.get.page-1}">P</a> </li>
+						<li> <a href="/index?page={$smarty.get.page-1}">Pre</a> </li>
 					{/if}
-					{assign var=i value=0}
-						{section name=total loop=10}
+					{section name=total loop=total}
 						<li class='active'>{assign var=i value=$i+1}<a href="/index?page={$i}">{$i}</a></li>
 					{/section}
-                    {if $total > 10 }
-                        <li><a href="/index?page={$smarty.get.page+1}">N</a></li>
+                    {if $smarty.get.page <= $total }
+                        <li><a href="/index?page={$smarty.get.page+1}">Next</a></li>
                     {/if}
+					<!--<li> 当前第{$smarty.get.page}页</li> -->
 				</ul>
 			</div>
-		</div>
-	</div>	<!-- /.content-container -->	
+		</div>	<!-- /.content-container -->	
     
 		<footer>
 			<p>Copyright &copy; 2017 </p>
@@ -76,7 +70,6 @@
 				<a href="#"><i class="fa fa-linkedin"></i></a>
 			</div>
 		</footer>
-	</div>
 	<script type="text/javascript" src="application/views/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="application/views/js/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="application/views/js/modernizr.2.5.3.min.js"></script>
@@ -92,6 +85,6 @@
 				}
 			});
 		});
-	</script>	
+	</script>-->	
 </body>
 </html>
