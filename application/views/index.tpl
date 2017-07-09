@@ -12,7 +12,8 @@
 <body>
 	<div class="main-container">
 		<nav class="main-nav">
-			<div id="logo" class="left"><a href="#"></a>Fanner</div>
+			<div id="logo" class="left">
+			<a href="/index">Fannner</a></div>
 			<ul class="nav right center-text">
 				<!--<li class="btn active">Home</li>
 				<li class="btn"><a href="">About</a></li>
@@ -21,7 +22,7 @@
 				<li class="btn"><a rel="" href="#">External</a></li>-->
 				<form method="get" id="searchform" action="index">
 					<fieldset class="search">
-						<input type="text" class="box" name="word" id="word" class="inputText" placeholder="你喜欢的歌或歌手" x-webkit-speech>
+						<input type="text" class="box" name="word" id="word" class="inputText" placeholder="你喜欢的歌或歌手"></input>
           				<button class="btn" title="SEARCH"> </button>
     				</fieldset>
 				</form>
@@ -36,7 +37,7 @@
 					<a class="portfolio-item">
 						<img src="{$value['commenter_avatar']}" alt="image 1">
 						<div class="detail">
-							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$value['commenter_content']}</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$value['commenter_content']} &nbsp;&nbsp;👍 (+{$value['be_liked_count']})</p>
 							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----来自用户'{$value['commenter_nickname']}'在歌手{$value['song_singer']}《{$value['song_name']}》下的留言</p>
 						</div>
 					</a>				
@@ -46,13 +47,13 @@
 				<ul class="nav">
 					<!--<li> 共{$total}页</li> -->
 					{if $smarty.get.page > 0 }
-						<li> <a href="/index?page={$smarty.get.page-1}">Pre</a> </li>
+						<li> <a href="/index?page={$smarty.get.page-1}">上一页</a> </li>
 					{/if}
 					{section name=total loop=total}
 						<li class='active'>{assign var=i value=$i+1}<a href="/index?page={$i}">{$i}</a></li>
 					{/section}
                     {if $smarty.get.page <= $total }
-                        <li><a href="/index?page={$smarty.get.page+1}">Next</a></li>
+                        <li><a href="/index?page={$smarty.get.page+1}">下一页</a></li>
                     {/if}
 					<!--<li> 当前第{$smarty.get.page}页</li> -->
 				</ul>
