@@ -62,7 +62,7 @@ footer p, address {	font-size: 14px; }
 
 .content-container {
 	box-sizing: border-box;
-	max-width: 1170px;
+	max-width: 1124px;
 	width: 100%;
 	margin: 0 auto;
 	padding: 15px;
@@ -85,7 +85,7 @@ footer p, address {	font-size: 14px; }
 
 nav {
 	overflow: hidden;
-	padding: 20px 30px 20px 20px;
+	padding: 20px 130px 20px 20px;
 }
 
 ul.nav {
@@ -216,10 +216,10 @@ p.justify { text-align: justify; }
 .portfolio-item .btn:hover { background-color: #ddd; }
 .pagination { width: 100%; }
 .pagination li {
-	width: 80px;
+	width: 50px;
 	height: 30px;
 	line-height: 30px;	
-	background-color: white;
+	background-color: #e0dded;
 	-webkit-box-shadow: 1px 1px 1px rgba(51,51,51,0.4);
 	-ms-box-shadow: 1px 1px 1px rgba(51,51,51,0.4);
 	box-shadow: 1px 1px 1px rgba(51,51,51,0.4);
