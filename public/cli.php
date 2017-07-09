@@ -1,11 +1,11 @@
 <?php
 /*************************************************************************
 	File Name: cli.php
-	Author: fanner
+	Author: fannner
 	Created Time: 2017年05月16日 星期二 16时38分20秒
- ************************************************************************/
+************************************************************************/
 if (php_sapi_name()!='cli') {
-    exit('this is cli interface');
+	exit('this is cli interface');
 }
 
 defined('DS')        || define('DS', '/');
@@ -15,9 +15,9 @@ defined('APPLICATION_PATH') || define('APPLICATION_PATH', dirname(__FILE__) . DS
 //defined('IS_CLI_INTERFACE') || define('IS_CLI_INTERFACE',1);
 
 $config = array(
-    'ap' => array(
-        'directory' => APPLICATION_PATH,
-    ),
+	'ap' => array(
+		'directory' => APPLICATION_PATH,
+	),
 ); 
 
 // set cli request params like "query_str=a=c&b=d"
@@ -29,9 +29,9 @@ foreach ($argv as $cliParams) {
 		parse_str(substr($cliParams, strlen($queryKeyStr)), $requestParams);
 		foreach ($requestParams as $key => $val) {
 			$simpleRequest->setParam($key, $val);
-        }
-        break;
-    }
+		}
+		break;
+	}
 }
 $application = new Yaf_Application( APPLICATION_PATH . "/conf/application.ini");  
 $application->bootstrap()->getDispatcher()->dispatch($simpleRequest);

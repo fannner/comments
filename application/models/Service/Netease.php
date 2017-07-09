@@ -3,7 +3,7 @@
 	File Name: Netease.php
 	Author: fannner
 	Created Time: 2017年05月16日 星期二 18时28分19秒
- ************************************************************************/
+************************************************************************/
 class Service_NeteaseModel extends Service_AbstractModel {
 
 	const COMMENTS_NUM = 5000;

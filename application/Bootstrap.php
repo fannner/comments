@@ -5,16 +5,16 @@
 	Created Time: 2017年04月12日 星期三 20时57分29秒
 ************************************************************************/
 class Bootstrap extends Yaf_Bootstrap_Abstract{
-	
+
 	/**
-     * 本地类自动加载
-     * @param Yaf_Dispatcher $dispatcher
-     */
-    public function _initLocalClass(Yaf_Dispatcher $dispatcher) {
-        $loader = Yaf_Loader::getInstance();
+	 * 本地类自动加载
+	 * @param Yaf_Dispatcher $dispatcher
+	 */
+	public function _initLocalClass(Yaf_Dispatcher $dispatcher) {
+		$loader = Yaf_Loader::getInstance();
 		$loader->registerLocalNamespace(array("Smarty",'Db', 'Third'));
 	}	
-	
+
 	/**
 	 * smarty初始化
 	 * @param Yaf_Dispatcher $dispatcher

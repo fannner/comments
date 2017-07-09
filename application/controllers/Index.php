@@ -5,15 +5,22 @@
 	Created Time: 2017年04月09日 星期日 17时13分29秒
  ************************************************************************/
 class IndexController extends AbstractController {
-	public function indexAction() {//默认Action
+
+	const NUM_PAGE = 20;
+
+	/**
+	 * 首页入口 index
+	 *
+	 * @return mixed
+	 */
+	public function indexAction() {
 		$indexService = new Service_IndexModel();
 		if (!empty($this->params['word'])) {
-			$word = trim($this->params['word']);
-			$commentsRet = $indexService->getCommentsByWord($word);
+			$commentsRet = $indexService->getCommentsByWord(trim($this->params['word']));
 		} else {
-			$page = empty($this->params['page']) ? 1 : $this->params['page'];
-			$commentsRet = $indexService->getComments($page, $num = 20);
-			$totalRet = $indexService->getTotalPage($num);
+			$page = empty($this->params['page']) ? 1 : intval($this->params['page']);
+			$commentsRet = $indexService->getComments($page, self::NUM_PAGE);
+			$totalRet = $indexService->getTotalPage(self::NUM_PAGE);
 			$totalPage = empty($totalRet) ? 0 : $totalRet;
 		}
 		foreach ($commentsRet as $index => &$item) {

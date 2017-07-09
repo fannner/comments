@@ -19,11 +19,10 @@ class NeteaseController extends AbstractController {
 	 */
 	public function parseIdToCommentAction() {//默认Action
 		//获取文件中的歌曲id信息
-		//$musicFile = APPLICATION_PATH."/application/data/music_info";
 		$musicFile = APPLICATION_PATH."/application/data/music_info.".date("Y-m-d");
 		$handle = fopen($musicFile, "r");
 		if (!$handle) {
-			//@to do
+			//@to do for log
 		}
 		$neteaseService = new Service_NeteaseModel();
 		while ($line = fgets($handle, 4096)) {
@@ -50,14 +49,14 @@ class NeteaseController extends AbstractController {
 			//get id from file or others
 		}
 		$url = 'http://music.163.com/api/search/get/web?csrf_token=';
-		$postFiled = 'hlpretag=&hlposttag=&s='. $musicId . '&type=1&offset=0&total=true&limit=1';
+		$postFiled = 'hlpretag=&hlposttag=&s='. trim($musicId) . '&type=1&offset=0&total=true&limit=1';
 		$musicInfo = $this->curlNeteaseApi($url, 'POST', $postFiled);
 		if ($musicInfo && ($formatData = json_decode($musicInfo, true))) {
 			if (isset($formatData['result']['songs'][0]) && isset($formatData['result']['songs'][0]['id']) && 
-			    isset($formatData['result']['songs'][0]['name']) && isset($formatData['result']['songs'][0]['artists'][0]['name'])) {
-				$music = $formatData['result']['songs'][0]['id'] ."\t" .$formatData['result']['songs'][0]['name'] ."\t" .$formatData['result']['songs'][0]['artists'][0]['name'] ."\n";
-				file_put_contents($musicFile, $music, FILE_APPEND);
-			}
+				isset($formatData['result']['songs'][0]['name']) && isset($formatData['result']['songs'][0]['artists'][0]['name'])) {
+					$music = $formatData['result']['songs'][0]['id'] ."\t" .$formatData['result']['songs'][0]['name'] ."\t" .$formatData['result']['songs'][0]['artists'][0]['name'] ."\n";
+					file_put_contents($musicFile, $music, FILE_APPEND);
+				}
 		}
 	}
 

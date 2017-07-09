@@ -10,13 +10,13 @@ class Db_NewPdo {
 	const LIST_AND = 1;
 	const LIST_SET = 2;
 
-    private static $instance = null;
+	private static $instance = null;
 	private $dsn;
 	private $dbUser;
 	private $dbPass;
 	private $sth;
 	private $dbh;
-	
+
 	public function __construct() {
 		header("Content-Type:text/html; charset=utf-8");
 		//这里在Bootstrap阶段注册了config类Yaf_Registry::set("config", Yaf_Application::app()->getConfig());
@@ -34,7 +34,7 @@ class Db_NewPdo {
 		}
 		return self::$instance;
 	}
-	
+
 	//连接数据库
 	private function connect() {
 		try {
@@ -46,41 +46,41 @@ class Db_NewPdo {
 	}
 
 	public function select($tables, $fields, $conds = NULL, $appends = NULL) {
-        $sql = 'SELECT ';
-        // 1. fields
-        $fields = $this->__makeList($fields, self::LIST_COM);
-        if(!strlen($fields)) {
-            $sql = NULL;
-            return NULL;
-        }
-        $sql .= "$fields FROM ";
+		$sql = 'SELECT ';
+		// 1. fields
+		$fields = $this->__makeList($fields, self::LIST_COM);
+		if(!strlen($fields)) {
+			$sql = NULL;
+			return NULL;
+		}
+		$sql .= "$fields FROM ";
 
-        // 2. from
-        $tables = $this->__makeList($tables, self::LIST_COM);
-        if(!strlen($tables)) {
-            $sql = NULL;
-            return NULL;
-        }
-        $sql .= $tables;
-		
+		// 2. from
+		$tables = $this->__makeList($tables, self::LIST_COM);
+		if(!strlen($tables)) {
+			$sql = NULL;
+			return NULL;
+		}
+		$sql .= $tables;
+
 		// 3. conditions
-        if($conds !== NULL) {
-            $conds = $this->__makeList($conds, self::LIST_AND);
-            if(!strlen($conds)) {
-                $sql = NULL;
-                return NULL;
-            }
-            $sql .= " WHERE $conds";
-        }
+		if($conds !== NULL) {
+			$conds = $this->__makeList($conds, self::LIST_AND);
+			if(!strlen($conds)) {
+				$sql = NULL;
+				return NULL;
+			}
+			$sql .= " WHERE $conds";
+		}
 
-        // 4. other append
-        if($appends !== NULL) {
-            $appends = $this->__makeList($appends, self::LIST_COM, ' ');
-            if(!strlen($appends)) {
-                $sql = NULL;
-                return NULL;
-            }
-            $sql .= " $appends";
+		// 4. other append
+		if($appends !== NULL) {
+			$appends = $this->__makeList($appends, self::LIST_COM, ' ');
+			if(!strlen($appends)) {
+				$sql = NULL;
+				return NULL;
+			}
+			$sql .= " $appends";
 		}
 
 		$query = $this->dbh->prepare($sql);
@@ -90,8 +90,8 @@ class Db_NewPdo {
 			$ret[] = $row;
 		}
 		return $ret;
-    }
-	
+	}
+
 	public function selectCount($tables, $conds = NULL, $appends = NULL) {
 
 		$fields = "COUNT(*) as num";
@@ -101,31 +101,31 @@ class Db_NewPdo {
 		}
 		return false;
 	}
-	
+
 	public function insert($table, $row, $onDup = NULL) {
-        $sql = 'INSERT ';
+		$sql = 'INSERT ';
 
-        // 1. table
-        $sql .= "$table SET ";
+		// 1. table
+		$sql .= "$table SET ";
 
-        // 2. clumns and values
-        $row = $this->__makeList($row, self::LIST_SET);
-        if(!strlen($row)) {
-            $sql = NULL;
-            return NULL;
-        }
-        $sql .= $row;
-
-        if(!empty($onDup)) {
-            $sql .= ' ON DUPLICATE KEY UPDATE ';
-            $onDup = $this->__makeList($onDup, self::LIST_SET);
-            if(!strlen($onDup)) {
-                $sql = NULL;
-                return NULL;
-            }
-            $sql .= $onDup;
+		// 2. clumns and values
+		$row = $this->__makeList($row, self::LIST_SET);
+		if(!strlen($row)) {
+			$sql = NULL;
+			return NULL;
 		}
-		
+		$sql .= $row;
+
+		if(!empty($onDup)) {
+			$sql .= ' ON DUPLICATE KEY UPDATE ';
+			$onDup = $this->__makeList($onDup, self::LIST_SET);
+			if(!strlen($onDup)) {
+				$sql = NULL;
+				return NULL;
+			}
+			$sql .= $onDup;
+		}
+
 		$query = $this->dbh->prepare($sql);
 		$query->execute();
 
@@ -148,24 +148,24 @@ class Db_NewPdo {
 		$sql .= "$row ";
 
 		// 2.conditions
-        if($conds !== NULL) {
-            $conds = $this->__makeList($conds, self::LIST_AND);
-            if(!strlen($conds)) {
-                $sql = NULL;
-                return NULL;
-            }
-            $sql .= "WHERE $conds ";
-        }
+		if($conds !== NULL) {
+			$conds = $this->__makeList($conds, self::LIST_AND);
+			if(!strlen($conds)) {
+				$sql = NULL;
+				return NULL;
+			}
+			$sql .= "WHERE $conds ";
+		}
 
-        // 3. other append
-        if($appends !== NULL) {
-            $appends = $this->__makeList($appends, self::LIST_COM, ' ');
-            if(!strlen($appends)) {
-                $sql = NULL;
-                return NULL;
-            }
-            $sql .= $appends;
-        }
+		// 3. other append
+		if($appends !== NULL) {
+			$appends = $this->__makeList($appends, self::LIST_COM, ' ');
+			if(!strlen($appends)) {
+				$sql = NULL;
+				return NULL;
+			}
+			$sql .= $appends;
+		}
 		$query = $this->dbh->prepare($sql);
 		$query->execute();
 
@@ -174,7 +174,7 @@ class Db_NewPdo {
 		}
 
 		return true;
-		
+
 	}
 
 	public function escapeString($str) {
@@ -182,8 +182,8 @@ class Db_NewPdo {
 	}
 
 	private function __makeList($arrList, $type = self::LIST_SET, $cut = ', ') {
-        if(is_string($arrList)) {
-            return $arrList;
+		if(is_string($arrList)) {
+			return $arrList;
 		}
 		$sql = '';
 
@@ -197,37 +197,37 @@ class Db_NewPdo {
 						if($value === NULL) {
 							$value = 'NULL';
 						} else {
-                            //$value = '\''.$this->escapeString($value).'\'';
-                            $value = $this->escapeString($value);
-                        }
-                    }
-                    $sql .= "$name=$value, ";
-                }
-            }
-            $sql = substr($sql, 0, strlen($sql) - 2);
+							//$value = '\''.$this->escapeString($value).'\'';
+							$value = $this->escapeString($value);
+						}
+					}
+					$sql .= "$name=$value, ";
+				}
+			}
+			$sql = substr($sql, 0, strlen($sql) - 2);
 		} else if($type == self::LIST_AND) {
-		// for where conds
-            foreach($arrList as $name => $value) {
-                if(is_int($name)) {
-                    $sql .= "($value) AND ";
-                } else {
-                    if(!is_int($value)) {
-                        if($value === NULL) {
-                            $value = 'NULL';
+			// for where conds
+			foreach($arrList as $name => $value) {
+				if(is_int($name)) {
+					$sql .= "($value) AND ";
+				} else {
+					if(!is_int($value)) {
+						if($value === NULL) {
+							$value = 'NULL';
 						} else {
-                            $value = $this->escapeString($value);
-                            //$value = '\''.$this->escapeString($value).'\'';
-                        }
-                    }
-                    $sql .= "($name $value) AND ";
-                }
-            }
-            $sql = substr($sql, 0, strlen($sql) - 5);
+							$value = $this->escapeString($value);
+							//$value = '\''.$this->escapeString($value).'\'';
+						}
+					}
+					$sql .= "($name $value) AND ";
+				}
+			}
+			$sql = substr($sql, 0, strlen($sql) - 5);
 		} else {
 			$sql = implode($cut, $arrList);
-        }
-        return $sql;
-    }	
+		}
+		return $sql;
+	}	
 
 	/*private function getPDOError() {
 		if ($this->dbh->errorCode() != '00000')
