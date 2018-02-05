@@ -6,6 +6,26 @@
 ************************************************************************/
 class Dao_NeteaseModel extends Dao_AbstractModel {
 
+	/*
+	 Create Table: CREATE TABLE `song_comment` (
+		 `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+		 `song_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '歌曲id',
+		 `song_name` varchar(100) NOT NULL DEFAULT '' COMMENT '歌曲名',
+		 `song_singer` varchar(100) NOT NULL DEFAULT '' COMMENT '歌手',
+		 `commenter_content` text COMMENT '评论',
+		 `commenter_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论人id',
+		 `commenter_nickname` varchar(100) NOT NULL DEFAULT '' COMMENT '评论人昵称',
+		 `commenter_avatar` varchar(100) NOT NULL DEFAULT '' COMMENT '评论人图像',
+		 `be_liked_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论被点赞次数',
+		 `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+		 `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+		 PRIMARY KEY (`id`),
+		 KEY `idx_song_name` (`song_name`) USING BTREE,
+		 KEY `idx_song_singer` (`song_singer`) USING BTREE,
+		 KEY `idx_song_singer_song_id_commenter_id` (`song_singer`,`song_id`,`commenter_id`) USING BTREE
+	 ) ENGINE=InnoDB AUTO_INCREMENT=21742 DEFAULT CHARSET=utf8 COMMENT='歌曲评论表'
+	 */
+
 	private static $_table = 'song_comment_v1';
 
 	private static $instance = null;
